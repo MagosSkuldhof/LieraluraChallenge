@@ -18,6 +18,13 @@ public class LiteraturaApplication implements CommandLineRunner {
         mostrarMenu();
     }
 
+    private void mostrarCantidadPorIdioma(String idioma) {
+        List<BookEntity> libros = bookRepository.findByLanguageIgnoreCase(idioma);
+        long cantidad = libros.size(); // o libros.stream().count();
+        System.out.println("Cantidad de libros en " + idioma + ": " + cantidad);
+    }
+
+
     private void mostrarMenu() {
         Scanner scanner = new Scanner(System.in);
         int opcion = -1;
