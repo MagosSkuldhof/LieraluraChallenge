@@ -10,47 +10,34 @@ public class Book {
     private String title;
 
     private List<Author> authors;
-    private List<String> subjects;
+    private List<String> languages;
 
-    public int getId() {
-        return id;
-    }
+    @JsonAlias("download_count")
+    private int downloadCount;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    // Getters y setters
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-    public String getTitle() {
-        return title;
-    }
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    public List<Author> getAuthors() { return authors; }
+    public void setAuthors(List<Author> authors) { this.authors = authors; }
 
-    public List<Author> getAuthors() {
-        return authors;
-    }
+    public List<String> getLanguages() { return languages; }
+    public void setLanguages(List<String> languages) { this.languages = languages; }
 
-    public void setAuthors(List<Author> authors) {
-        this.authors = authors;
-    }
+    public int getDownloadCount() { return downloadCount; }
+    public void setDownloadCount(int downloadCount) { this.downloadCount = downloadCount; }
 
-    public List<String> getSubjects() {
-        return subjects;
-    }
-
-    public void setSubjects(List<String> subjects) {
-        this.subjects = subjects;
+    public String getPrimaryLanguage() {
+        return (languages != null && !languages.isEmpty()) ? languages.get(0) : "desconocido";
     }
 
     @Override
     public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", authors=" + authors +
-                ", subjects=" + subjects +
-                '}';
+        String autores = (authors != null) ? authors.stream().map(Author::getName).reduce((a, b) -> a + ", " + b).orElse("desconocido") : "desconocido";
+        return "Título: " + title + "\nAutor: " + autores + "\nIdioma: " + getPrimaryLanguage() + "\nDescargas: " + downloadCount;
     }
 }
