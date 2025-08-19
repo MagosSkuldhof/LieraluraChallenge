@@ -22,8 +22,18 @@ public class Book {
     public String getTitle() { return title; }
     public void setTitle(String title) { this.title = title; }
 
-    public List<Author> getAuthors() { return authors; }
-    public void setAuthors(List<Author> authors) { this.authors = authors; }
+    public Author getPrimaryAuthor() {
+        return (authors != null && !authors.isEmpty()) ? authors.get(0) : new Author("desconocido", null, null);
+    }
+    @Override
+    public String toString() {
+        Author autor = getPrimaryAuthor();
+        return "Título: " + title +
+                "\nAutor: " + autor.getName() +
+                "\nIdioma: " + getPrimaryLanguage() +
+                "\nDescargas: " + downloadCount;
+    }
+
 
     public List<String> getLanguages() { return languages; }
     public void setLanguages(List<String> languages) { this.languages = languages; }
